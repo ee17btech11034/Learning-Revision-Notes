@@ -16,7 +16,7 @@ A Tree is a non-linear, hierarchical data structure consisting of nodes connecte
     *   **Edge:** The link connecting two nodes.
     *   **Height of a Node:** The number of edges on the longest path from that node down to a leaf.
     *   **Depth of a Node:** The number of edges from the root to that node.
-
+*   **Data Structures:** We can use `Array` and `LinkedList` to create tree. But we prefer to use LinkedList as we are not sure of length. And to store in array we will have to make that tree to CBT, which shows dummy node (empty space in array) will waste the space.
 ---
 
 ## 2. Comprehensive Types of Trees
@@ -32,7 +32,8 @@ Trees are customized under the hood based on their structural layout, child cons
 *   **Full/Strict Binary Tree:** Every node has either exactly 0 or 2 children. No node has just one child.
 *   **Complete Binary Tree:** Every level is completely filled, except possibly the last level, which must be filled from left to right without gaps. (Critical blueprint for Array-based Binary Heaps).
 *   **Perfect Binary Tree:** All internal nodes have exactly 2 children, and all leaf nodes sit at the exact same depth level.
-*   **Degenerate (Skewed) Tree:** A tree where every internal node has only one child. Structurally, it degrades into a performance-crippling Singly Linked List.
+*   **Degenerate (Skewed) Tree:** A tree where every internal node has only one child. Structurally, it degrades into a performance-crippling Singly Linked List. If all nodes are in right of each then it is called  **right skewed**; if all nodes are in left of each then it is called **left skewed**; and if in zig-zag (some are in right and some in left) then it is called **Degerate**.
+*   **Extended Binary Tree:** A tree where we fill all leaf nodes with **Dummy** nodes.
 
 ### Self-Balancing Variations
 *   **AVL Tree:** A strictly self-balancing BST where the height difference (Balance Factor) between left and right subtrees of any node cannot exceed 1. It triggers structural rotations to maintain balance during adjustments.
@@ -49,7 +50,7 @@ Trees are customized under the hood based on their structural layout, child cons
 The performance of a tree is tightly tethered to its height ($h$). In a perfectly balanced tree, $h = \log n$. In a severely skewed tree, $h = n$. 
 
 ### Standard Binary Search Tree (BST) Performance
-*   **Search:** $\Omega(1) \rightarrow \Theta(\log n) \rightarrow O(n)$
+*   **Search:** $\Omega(1) \rightarrow \Theta(\log n) \rightarrow O(n) (skewed)$
 *   **Insertion:** $\Omega(1) \rightarrow \Theta(\log n) \rightarrow O(n)$
 *   **Deletion:** $\Omega(1) \rightarrow \Theta(\log n) \rightarrow O(n)$
 
