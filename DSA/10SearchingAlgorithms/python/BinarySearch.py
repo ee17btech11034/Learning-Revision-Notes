@@ -20,6 +20,9 @@ Binary Search:
     - You cannot change the value at a specific memory address for an integer.
     - Every time you calculate a new value with start + (end - start) // 2, Python creates a brand-new integer object somewhere in memory.
     - The variable mid is simply a label (pointer) that switches to reference this new memory address.
+
+Questions:
+    - find Peak (if arr[mid] > arr[mid +1] means local peak is on left side)
 '''
 
 def binarySearchUsingRecursion(arr, start, end, key):
