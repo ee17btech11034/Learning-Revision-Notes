@@ -1,6 +1,6 @@
 # Linux Services Management with SYSTEMCTL (Notes)
 
-Comprehensive technical notes based on Episode 15 of the Linux Learning Series. This guide covers service and daemon architecture, full `systemctl` syntax workflows, legacy syntax alternatives, and essential production-grade related topics.
+This guide covers service and daemon architecture, full `systemctl` syntax workflows, legacy syntax alternatives, and essential production-grade related topics.
 
 ---
 
@@ -60,12 +60,18 @@ The modern utility `systemctl` offers advanced service capabilities and handles 
   * Removes structural access restrictions, restoring the service back to regular manual or automated control states.
 * `sudo systemctl daemon-reload`
   * Forces systemd to scan the disk for newly added or customized unit files, updating its execution tree cleanly on the fly.
+* `journalctl -u <service-name>`
+  * view logs of a service
+* `man systemctl`
+  * manual for systemctl command.
 
 ---
 
 ## 🔄 Section 3: Legacy Comparison (`service` vs `systemctl`)
 
 While administrators should prioritize the modern `systemctl` command structure, legacy commands remain useful when interacting with older enterprise machines.
+* **systemctl** is more powerful and provides additional functionality (eg enabling/disabling services, viewing logs, and masking services).
+* **service** is simple but lacks advanced options and is considered deprecated.
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -84,9 +90,32 @@ While administrators should prioritize the modern `systemctl` command structure,
 * **Argument Ordering**: `systemctl` places the desired action first and the target application second. The legacy `service` tool places the application name first and the action command at the end.
 * **Deprecation Warnings**: Under the hood, modern machines transparently redirect legacy `service` requests through systemd compatibility layers. However, relying on old commands is a bad habit; they are slowly being deprecated across modern Linux distributions.
 
+```bash
+# Using Service
+  
+  ## check service status
+  sudo service <service-name> status
+  sudo service apache2 status
+
+  ## Start a service
+  sudo service <service-name> start
+  
+  ## Stop a service
+  sudo service <service-name> stop
+  
+  ## Restart a service
+  sudo service <service-name> restart
+  
+  ## Reload a service
+  sudo service <service-name> reload
+  
+  ## list all services
+  service --status-all
+```
+
 ---
 
-## 💡 Section 4: Critical Related Topics Missed in the Video
+## 💡 Section 4: Other Related Topics 
 
 To round out your production knowledge, ensure you understand these additional concepts commonly used in enterprise scale-out architectures:
 
@@ -121,3 +150,50 @@ Legacy Linux machines relied on numbered Runlevels (`0-6`) to determine system s
 Briefly touched on in the lecture, the `stat` command provides deep metadata context for files:
 * Run `stat /etc/systemd/system/` to display exact inode configurations, file block allocations, and strict access permission profiles.
 * It logs three distinct system timestamps: **Access** (last read time), **Modify** (last content update), and **Change** (last metadata or permission adjustment).
+
+## More Commands
+```bash
+man systemctl
+
+# data or entries related to service are also kept in a files
+cd /run/systemd # systemd is service manager to manage serives.
+ls system # .service file are also files
+sudocat system/netplan---.service
+
+cat /run/sshd.pid # provide the process id => pid may change everytime we stop and start the service
+ps aux | grep -i ssh
+
+systemctl stop ssh # stopped
+systemctl start ssh # start
+cat /run/sshd.pid # now id is different
+
+# /run is th dir where all the volatile files like PID are present.
+
+
+systemctl status apache2
+systemctl status cron # can read more on CGroup
+
+sysemctl reload ssh # just reload to apply changes but does not restart
+
+
+sudo systemctl enable ssh #provide the dir path with that it is synchronised
+cat /usr/lib/systemd/systemd-sysv-install # got this path from above enable command
+stat /usr/lib/systemd/systemd-sysv-install # stat command is to see the meta data of a file.
+
+
+# mask => prevent any service to start
+sudo systemctl mask ssh # service is masked and it will create a symlink
+systemctl restart ssh # show failed to restart as it is masked
+systemctl status ssh # show ssh as inactive
+
+sudo systemctl unmask ssh # loaded but inactive
+sudo systemctl start ssh # start the service
+systemctl status ssh # service is masked and active -> only admin can start it now, other users can only stop it.
+systemctl list-units --type=service # can see ssh in yellow 
+
+
+systemctl daemon-reload # under the hood daemon is the one managing systemctl and service. Both use same dir.
+
+# INIT is in the previous version of Linux but now it is systemd. It runs on PID 1 (one) as first process.
+htop # can check here as well
+```
