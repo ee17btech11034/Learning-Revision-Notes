@@ -41,7 +41,7 @@ Variables inside Linux shell scripting are categorised into three primary archit
 * **Export Action**: You use the `export` keyword to push a local variable description up into the active environment space.
 * **Syntax**:
   ```bash
-  export TEAM_LEAD="Himanshu"
+  export TEAM_LEAD="Himanshu" # we can access these in any shell in current environment (session created from it.
   ```
 
 ---
@@ -57,7 +57,24 @@ Special variables extract process contexts, count variables, and check command e
 | **`$*`** | Combines all arguments cleanly into a single continuous text string line. |
 | **`$@`** | Parses inputs individually, preserving distinct positional elements one by one. |
 | **`$?`** | Captures the exit status code of the last completed command execution thread (`0` = Success, `Non-Zero` = Failure or Permission Error). |
+```bash
+#!/bin/bash
+echo "Script Name: $0" # outputs the name of script
+echo "First Arg: $1" # outputs the first argument
+echo "Sec argument: $2" # outputs the second argument
+echo "last argument: $n" # outputs the last argument
+echo "Script Name: $#" # outputs the number of arguments.
+echo "Exit status: $?" # prints the exit status of the last command. 0-> successful execution else failed
 
+if [ $? -eq 0 ]; then
+   echo "Successful"
+else
+   echo "Failed"
+fi
+```
+```bash
+./abc.sh arg1 arg2 arg3 arg4
+```
 ---
 
 ## 4. Unsetting Variables
@@ -66,9 +83,10 @@ To explicitly drop a regular local variable and free up its allocated space from
 ```bash
 # Define a test variable
 db_user="root"
+echo $db_user
 
 # Wipe the configuration variable from active tracking
-unset db_user
+unset db_user # not readonly vars
 ```
 
 ---
@@ -96,5 +114,3 @@ You can write custom workflows or map complex administrative scripts to run as s
    ```
 
 ---
-
-Now that you know how to manage scopes and turn regular scripts into custom system commands, what type of **system automation tool** (such as a custom backup log manager, diagnostic checker, or environment builder) are you planning to construct next?
