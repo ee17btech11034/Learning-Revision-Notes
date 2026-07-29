@@ -2,6 +2,7 @@
 # common factors.
 
 # gcd(a,b) = gcd(a, b-a) =....= gcd(k, 0) => k is the common factor.
+# gcd(a,b) = gcd(a%b, b) =....= gcd(k, 0) => k is the common factor.
 
 def gcdUsingSimple(a, b):
     gcdAns = 1
@@ -20,6 +21,15 @@ def gcdUsingDiff(a, b): # Euclidean Theorem
         return gcdUsingDiff(a, b-a)
     return gcdUsingDiff(a-b, b)
 
+def gcdUsingModulo(a, b): # Euclidean Theorem => TC = O( logI (min(m, n))), I as we can not say anything
+    if (a == 0):
+        return b
+    if (b == 0):
+        return a
+    if (a < b):
+        return gcdUsingDiff(a, b%a)
+    return gcdUsingDiff(a%b, b)
+
 if __name__=="__main__":
     num1 = int(input("Enter num1: "))
     num2 = int(input("Enter num2: "))
@@ -30,3 +40,6 @@ if __name__=="__main__":
 
     gcdVal2 = gcdUsingDiff(num1, num2)
     print(f"GCD({num1}, {num2}) => {gcdVal2}")
+
+    gcdVal3 = gcdUsingDiff(num1, num2)
+    print(f"GCD({num1}, {num2}) => {gcdVal3}")

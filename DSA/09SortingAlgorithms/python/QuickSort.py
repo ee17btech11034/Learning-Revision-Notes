@@ -48,11 +48,36 @@ def quickSort(inputArr, startInd, endInd):
     quickSort(inputArr, right+1, endInd)
 
 
+def quickSort2(inputArr, startInd, endInd):
+    if (endInd <= startInd):
+        return
+    
+    start = startInd
+    end = endInd
+    pivot_ind = start
+
+    while(start <= end):
+        while((start <= end) and (inputArr[start] <= inputArr[pivot_ind])):
+            start += 1
+        while((start <= end) and (inputArr[pivot_ind] < inputArr[end])):
+            end -= 1
+        if (start < end):
+            inputArr[start], inputArr[end] = inputArr[end], inputArr[start]
+    
+    pivot_ind = end
+    inputArr[pivot_ind], inputArr[startInd] = inputArr[startInd], inputArr[pivot_ind]  # swap pivot
+    quickSort2(inputArr, startInd, pivot_ind-1)
+    quickSort2(inputArr, pivot_ind+1, endInd)
+
+
 if __name__=="__main__":
     inputArr = [64, 32, 25, 45, 20, 15]
     # inputArr = [64, 32, 25, 45, 20, 15, 1]
 
     n = len(inputArr)
     
-    quickSort(inputArr, 0, n-1)
+    # quickSort(inputArr, 0, n-1)
+    print(inputArr)
+    
+    quickSort2(inputArr, 0, n-1)
     print(inputArr)

@@ -5,7 +5,7 @@ Insertion Sort:
 
     - Best case when arr is already sorted then only single traversal is needed.
 
-    - TC ==> O(n) --> O(n^2)
+    - TC ==> O(n) best --> O(n^2)
 '''
 
 

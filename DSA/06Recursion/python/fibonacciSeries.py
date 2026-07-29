@@ -1,4 +1,5 @@
 #Fibonacci Series: 1, 1, 2, ...   (1st, 2nd elements)
+# TC => O(2^n) in recursion 
 
 def fibonacciNumber(n):
     if ((n == 1) or (n == 2)):
