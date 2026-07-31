@@ -111,4 +111,56 @@ There are 3 methods of Data Transfer:
         - however, In DMA, a DMA Controller is used to handle the data transfer, allowing the CPU to delegate the task. 
         - the DMA Controller takes control of the system buses to directly transfer data between the I/O device and memory, bypassing the CPU. This frees up the CPU for other tasks, improving overall system efficiency.
 
-## 
+## Synchronous Vs Asynchronous Data Transfer
+### Synchronous 
+    - It is achieved by a device called master generator, which generate a periodic train of clock pulse.
+### Asynchronous
+    - When the timing untis of 2 devices are independent that is they are under different control then it is called asynchronous communication.
+
+Ways:
+    - Source Initiated I/O:
+        - The unit receiving the data item response with another control signal to acknowledge the receipt of the data. this type of agreement b/w 2 independent units is reffered to as handshaking.
+        ```bash
+               |                       |
+        Source |----------Data Bus---->| Destination Unit
+               |---------Strobe------->|
+        
+        Source put the data on data bus and put strobe signal to tell that data on Data Bus is valid and you can copy that.
+        Destination copy the data after looking at Strobe signal. Then  Source put the strobe signal to low to close the connection.
+        These are 2 way handshake as using 2 signals.
+        ```
+    - Destination Initiated I/O:
+        - The unit receiving the data item response with another control signal to acknowledge the receipt of the data. this type of agreement b/w 2 independent units is reffered to as handshaking.
+        ```bash
+               |                       |
+        Source |----------Data Bus---->| Destination Unit
+               |<---------Strobe-------|
+        
+        Destination put strobe signal to tell source that it is ready to accept the data.
+        Source put the data on Data Bus after looking at Strobe signal. Then Destination put the strobe signal to low to close the connection.
+        ```
+    
+    - Source initiated Transfer
+        ```bash
+               |----------Data Bus---->|
+        Source |--------Data Valid---->| Destination Unit
+         Unit  |<---Data Accepted------|
+        
+        Source put the valid data on data bus. Then Source set Signal as Valid.
+        Destination will copy the data and once it is done destination will send "Data Accepted" signal.
+        Once Data accepted the source will low down the "Data Valid" Signal.
+
+        These are 3 way handshake as using 3 signals.
+        ```
+    - Destination initiated Transfer
+        ```bash
+               |----------Data Bus---->|
+        Source |--------Data Valid---->| Destination Unit
+         Unit  |<---Ready for data-----|
+        
+        Destination put the "ready for Data" signal on high.
+        Source will put the valid data on data bus. Then Source set Signal as Valid.
+        Destination will copy the data and once it is done destination will send "Data Accepted" signal.
+        
+        Here we have surity that Destination gets the signal as Destination was ready for Data.
+        ```

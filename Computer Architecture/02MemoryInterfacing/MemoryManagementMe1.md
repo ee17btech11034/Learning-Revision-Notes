@@ -206,3 +206,32 @@ It is relationship of main memory and cache memory.
         - Advantages: Less number of memory access and less write operations.
         - Disadvantages: inconsistency may occuras it is updated in the end when we are removing that data from cache.
         - To know or mark that this data has been updated, we use a bit to mark it that is called "Dirty Bit", 0-> no updated, 1-> updated.
+
+
+## RAM
+Semiconductor RAM (Randon Access Memory) is a type of computer memory that allows data to be read and written in almost the same amount of time irrespective of the physical location of data inside the memory. it uses semiconductor tech to store data.
+    - Dynamic RAM:
+        - it uses Capacitors
+        - speed is slow
+        - Requires frequent refresh as it is in capacitors and that discharge with time
+        - Low power consumption and cheaper
+        - used in main memory
+    - Static RAM: 
+        - It uses bistable latching (flip-flops use krte hai)
+        - speed is fast
+        - No refresh required
+        - High power consumption and more expensive
+        - used in cache memory
+
+Can read about 2D and 2.5D organization.
+
+## ROM (Read Only Memory)
+- Non-volatile memory, retains data even when power is off.
+- Used primarily for firmware, which contains the basic instructions for hardware.
+- Data written during the manufacturing process; traditionally, it can not be modified (Hence "read-only).
+- Types: (old to newest from top to bottom)
+    - MROM (Masked ROM)
+    - PROM (Programmed Read Only Memory)
+    - EPROM (Erasable Programmable)
+    - EEPROM (Electrically Erasable Programmable)
+    - Flash Memory (a type of EEPROM)
