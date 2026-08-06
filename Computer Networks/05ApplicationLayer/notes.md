@@ -1,0 +1,26 @@
+# Application Layer
+    - It provide services like:
+        - Electronic mail:
+            - Sender send the email to sender's mail server using SMTP (it is push protocol).
+            - sender's mail server send mail to receiver's mail server using SMTP (it is push protocol).
+            - Receiver receives it using POP3/IMAP (pull protocol).
+            - now we use Web-based mail, first and third is taken care by HTTP now.
+        - file transfer and access:
+            - File Transfer Protocol (FTP)
+            - It uses TCP/IP for copying file.
+            - It stablishes 2 connections -> 
+                - Control Process for controlling / tracking purpose
+                - Data Transfer procees to transfer the data. 
+        - Access to system resources
+        - Surfing the world wide web
+            - client-server architecture.
+            - Cookies:
+                - 
+            - HTTP: 
+                - Hyper Text Transfer Protocol
+                - earlier TCP connection was terminated as soon as data was completed. 
+                - HTTP 1.1 persistent the connection even after completion until client is talking/sending
+            - DNS:
+                - Domain Name System
+
+        - Network Management. 
